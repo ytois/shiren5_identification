@@ -1,7 +1,4 @@
-import React from 'react'
-import { AppBar, Button, Grid, TextField } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-
+import React, { useMemo } from 'react'
 import {
   Table,
   TableBody,
@@ -11,19 +8,22 @@ import {
   TableRow,
   Paper,
 } from '@material-ui/core'
-import Items from './items.json'
+import ItemMaster from './items.json'
 
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    top: 'auto',
-    bottom: 0,
-    padding: theme.spacing(1),
-  },
-}))
+type Props = {
+  price?: number
+}
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default function ItemTable() {
-  const classes = useStyles()
+export default function ItemTable(props: Props) {
+  const items = useMemo(() => {
+    return ItemMaster.filter((item: any) => {
+      if (!props.price) {
+        return true
+      }
+      return item.bid_price === props.price
+    })
+  }, [props.price])
 
   return (
     <TableContainer component={Paper}>
@@ -40,7 +40,7 @@ export default function ItemTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Items.map((item) => (
+          {items.map((item) => (
             <TableRow key={item.name}>
               <TableCell align="center">{item.type}</TableCell>
               <TableCell>{item.name}</TableCell>
