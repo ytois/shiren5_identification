@@ -8,7 +8,8 @@ import {
   TableRow,
   Paper,
 } from '@material-ui/core'
-import ItemMaster from './items.json'
+import ItemIcon from './ItemIcon'
+import ItemMaster from '../items.json'
 
 type Props = {
   price?: number
@@ -42,7 +43,9 @@ export default function ItemTable(props: Props) {
         <TableBody>
           {items.map((item) => (
             <TableRow key={item.name}>
-              <TableCell align="center">{item.type}</TableCell>
+              <TableCell align="center">
+                <ItemIcon name={item.type} size={50} />
+              </TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell align="center">
                 {item.capacity_min} ～ {item.capacity_max}
