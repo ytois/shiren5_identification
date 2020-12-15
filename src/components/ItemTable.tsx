@@ -10,20 +10,28 @@ import {
 } from '@material-ui/core'
 import ItemIcon from './ItemIcon'
 import ItemMaster from '../items.json'
+import ItemDiscriminator from '../lib/itemFilter'
 
 type Props = {
-  price?: number
+  price: number
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function ItemTable(props: Props) {
   const items = useMemo(() => {
-    return ItemMaster.filter((item: any) => {
-      if (!props.price) {
-        return true
+    if (!props.price) {
+      return ItemMaster
+    }
+
+    const discriminator = new ItemDiscriminator('buy')
+
+    return ItemMaster.reduce((list: any[], item: any) => {
+      const res = discriminator.disc(item, props.price)
+      if (res) {
+        list.push(res)
       }
-      return item.bid_price === props.price
-    })
+      return list
+    }, [])
   }, [props.price])
 
   return (
@@ -33,11 +41,9 @@ export default function ItemTable(props: Props) {
           <TableRow>
             <TableCell>種類</TableCell>
             <TableCell>名前</TableCell>
+            <TableCell>状態</TableCell>
             <TableCell>容量</TableCell>
-            <TableCell>買値</TableCell>
-            <TableCell>売値</TableCell>
-            <TableCell>印</TableCell>
-            <TableCell>重複</TableCell>
+            <TableCell>基本価格(売値)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -48,14 +54,13 @@ export default function ItemTable(props: Props) {
               </TableCell>
               <TableCell>{item.name}</TableCell>
               <TableCell align="center">
-                {item.capacity_min} ～ {item.capacity_max}
+                {item.blessing ? '祝' : null}
+                {item.curse ? '呪' : null}
               </TableCell>
-              <TableCell align="right">{item.bid_price}</TableCell>
-              <TableCell align="right">{item.selling_price}</TableCell>
-              <TableCell align="center">
-                {item.mark} / {item.sword_mark} / {item.shield_mark}
+              <TableCell align="center">{item.capacity}</TableCell>
+              <TableCell align="right">
+                {item.bid_price} ({item.selling_price})
               </TableCell>
-              <TableCell align="center">{item.multiple}</TableCell>
             </TableRow>
           ))}
         </TableBody>

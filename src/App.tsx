@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <InputArea onChangePrice={handleChange} />
       <Container>
-        <ItemTable />
+        <ItemTable price={price} />
       </Container>
     </div>
   )
