@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -13,11 +13,15 @@ import {
 import ItemIcon from './ItemIcon'
 import ItemMaster from '../items.json'
 import ItemDiscriminator from '../lib/itemFilter'
+import ItemDialog from './ItemDialog'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   caption: {
     margin: theme.spacing(1),
+  },
+  description: {
+    maxWidth: '500px',
   },
 }))
 
@@ -30,6 +34,20 @@ type Props = {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function ItemTable(props: Props) {
   const classes = useStyles()
+
+  const [selectedItem, setItem] = useState(null)
+  const [dialog, setDialog] = useState<boolean>(false)
+
+  function handleCellClick(item: any) {
+    setItem(item)
+    if (item) {
+      setDialog(true)
+    }
+  }
+  function dialogClose() {
+    setDialog(false)
+  }
+
   const items = useMemo(() => {
     if (!props.price) {
       return ItemMaster
@@ -58,7 +76,10 @@ export default function ItemTable(props: Props) {
             <TableCell align="center">状態</TableCell>
             <TableCell align="center">容量</TableCell>
             <Hidden xsDown>
-              <TableCell align="center">基本価格(売値)</TableCell>
+              <TableCell align="center">基本価格</TableCell>
+            </Hidden>
+            <Hidden mdDown>
+              <TableCell className={classes.description}>説明</TableCell>
             </Hidden>
           </TableRow>
         </TableHead>
@@ -68,15 +89,23 @@ export default function ItemTable(props: Props) {
               <TableCell align="center">
                 <ItemIcon name={item.type} size={50} />
               </TableCell>
-              <TableCell>{item.name}</TableCell>
+              <TableCell onClick={() => handleCellClick(item)}>
+                {item.name}
+              </TableCell>
               <TableCell align="center">
                 {item.blessing ? '祝' : null}
                 {item.curse ? '呪' : null}
               </TableCell>
-              <TableCell align="center">{item.capacity}</TableCell>
+              <TableCell align="center">{item.capacity || '-'}</TableCell>
               <Hidden xsDown>
                 <TableCell align="right">
-                  {item.bid_price} ({item.selling_price})
+                  {props.priceType === 'buy' ? item.bid_price : ''}
+                  {props.priceType === 'sell' ? item.selling_price : ''}
+                </TableCell>
+              </Hidden>
+              <Hidden mdDown>
+                <TableCell className={classes.description}>
+                  {item.description}
                 </TableCell>
               </Hidden>
             </TableRow>
@@ -91,6 +120,8 @@ export default function ItemTable(props: Props) {
       >
         ※容量は床落ちの初期容量のみを考慮しています
       </Typography>
+
+      <ItemDialog item={selectedItem} open={dialog} onClose={dialogClose} />
     </TableContainer>
   )
 }

@@ -41,7 +41,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "ちからの最大値が3上がる。"
   },
   {
@@ -56,7 +56,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "装備している武器と同系の武器が持ち物にあると攻撃力が上がる。多く持っているほど攻撃力は大きく上がる。"
   },
   {
@@ -146,7 +146,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "呪い・道具封印状態のアイテムを持っていると攻撃・矢が会心の一撃になることがある。\n呪い・道具封印の数が多いほど会心の一撃が出やすい。壺の中の呪い・道具封印アイテムは無効"
   },
   {
@@ -161,7 +161,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "受ける攻撃がたまに痛恨の一撃になる。"
   },
   {
@@ -176,7 +176,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "ターン経過でフロアに罠が増えていく。"
   },
   {
@@ -191,7 +191,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "モンスターがフロアに自然発生する速度が倍になる。"
   },
   {
@@ -221,7 +221,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "HPの自然回復が早くなるが、満腹度も早く減る。"
   },
   {
@@ -281,7 +281,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "たまにワープすることがある。"
   },
   {
@@ -296,7 +296,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "たまに自分が爆発することがある。"
   },
   {
@@ -356,7 +356,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "フロアにいるモンスターの位置がわかる。見渡せる位置にモンスターがいると毎ターン10ダメージを受ける。\n夜の場合、松明の範囲にモンスターがいるとダメージを受ける。松明無しの場合隣接時のみダメージを受ける。"
   },
   {
@@ -371,7 +371,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "フロアにある道具の位置がわかる。道具を拾うたびに、10ダメージを受ける。"
   },
   {
@@ -401,7 +401,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "1ターン経過する度に経験値を1得る。"
   },
   {
@@ -491,7 +491,7 @@
     "mark": null,
     "sword_mark": null,
     "shield_mark": null,
-    "multiple": "○",
+    "multiple": true,
     "description": "夜のモンスターに直接攻撃でダメージを与えられるようになる。"
   },
   {
