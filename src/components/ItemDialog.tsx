@@ -80,35 +80,35 @@ export default function ItemDialog(props: Props) {
           />
         </ListItem>
         <ListItem>
-          {item.mark && (
+          {item && item.mark && (
             <TextField
               label="印"
               value={item.mark}
               InputProps={{ readOnly: true }}
             />
           )}
-          {item.sword_mark && (
+          {item && item.sword_mark && (
             <TextField
               label="剣印"
               value={item.sword_mark}
               InputProps={{ readOnly: true }}
             />
           )}
-          {item.shield_mark && (
+          {item && item.shield_mark && (
             <TextField
               label="盾印"
               value={item.shield_mark}
               InputProps={{ readOnly: true }}
             />
           )}
-          {item.capacity_min && (
+          {item && item.capacity_min && (
             <TextField
               label="容量"
               value={`${item.capacity_min} - ${item.capacity_max}`}
               InputProps={{ readOnly: true }}
             />
           )}
-          {item.multiple && (
+          {item && item.multiple && (
             <TextField
               label="重複"
               value={item.multiple ? '○' : '-'}
