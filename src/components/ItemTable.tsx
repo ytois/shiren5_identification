@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Hidden,
 } from '@material-ui/core'
 import ItemIcon from './ItemIcon'
 import ItemMaster from '../items.json'
@@ -43,11 +44,13 @@ export default function ItemTable(props: Props) {
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>種類</TableCell>
+            <TableCell align="center">種類</TableCell>
             <TableCell>名前</TableCell>
-            <TableCell>状態</TableCell>
-            <TableCell>容量</TableCell>
-            <TableCell>基本価格(売値)</TableCell>
+            <TableCell align="center">状態</TableCell>
+            <TableCell align="center">容量</TableCell>
+            <Hidden xsDown>
+              <TableCell align="center">基本価格(売値)</TableCell>
+            </Hidden>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,9 +65,11 @@ export default function ItemTable(props: Props) {
                 {item.curse ? '呪' : null}
               </TableCell>
               <TableCell align="center">{item.capacity}</TableCell>
-              <TableCell align="right">
-                {item.bid_price} ({item.selling_price})
-              </TableCell>
+              <Hidden xsDown>
+                <TableCell align="right">
+                  {item.bid_price} ({item.selling_price})
+                </TableCell>
+              </Hidden>
             </TableRow>
           ))}
         </TableBody>

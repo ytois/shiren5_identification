@@ -2,15 +2,24 @@ import React, { useState } from 'react'
 import InputArea from './components/InputArea'
 import ItemTable from './components/ItemTable'
 import { Container } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(10),
+  },
+}))
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function App() {
+  const classes = useStyles()
+
   const [price, setPrice] = useState<number | null>(null)
   const [priceType, setPriceType] = useState<'buy' | 'sell'>('buy')
   const [capacity, setCapacity] = useState<number | null>(null)
 
   const changePrice = (price: number | null) => {
-    console.log(price)
     setPrice(price)
   }
 
@@ -32,7 +41,7 @@ function App() {
         onChangePriceType={changePriceType}
         onChangeCapacity={changeCapacity}
       />
-      <Container>
+      <Container className={classes.container}>
         <ItemTable price={price} priceType={priceType} capacity={capacity} />
       </Container>
     </div>

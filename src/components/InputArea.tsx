@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { AppBar, Button, Grid, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     top: 'auto',
     bottom: 0,
     padding: theme.spacing(1),
+    backgroundColor: '#263238',
   },
 }))
 
@@ -66,26 +67,28 @@ const InputArea = (props: Props) => {
         alignItems="center"
         spacing={1}
       >
-        <Grid item>
+        <Grid item lg={1} md={2} xs={2}>
           <Button
             color={priceTypeColor}
             variant="contained"
             size="large"
             onClick={changePriceType}
+            fullWidth
           >
             {priceTypeText}
           </Button>
         </Grid>
-        <Grid item>
+        <Grid item lg={2} md={4} xs={8}>
           <TextField
             label="値段"
             type="number"
             variant="outlined"
             value={props.price || ''}
             onChange={onChangePrice}
+            fullWidth
           />
         </Grid>
-        <Grid item>
+        <Grid item lg={1} md={2} xs={2}>
           <TextField
             label="容量"
             type="number"
