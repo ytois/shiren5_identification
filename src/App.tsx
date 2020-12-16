@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import TitleBar from './components/TitleBar'
 import InputArea from './components/InputArea'
 import ItemTable from './components/ItemTable'
 import { Container } from '@material-ui/core'
@@ -33,6 +34,10 @@ function App() {
 
   return (
     <div className="App">
+      <TitleBar />
+      <Container className={classes.container}>
+        <ItemTable price={price} priceType={priceType} capacity={capacity} />
+      </Container>
       <InputArea
         price={price}
         priceType={priceType}
@@ -41,9 +46,6 @@ function App() {
         onChangePriceType={changePriceType}
         onChangeCapacity={changeCapacity}
       />
-      <Container className={classes.container}>
-        <ItemTable price={price} priceType={priceType} capacity={capacity} />
-      </Container>
     </div>
   )
 }

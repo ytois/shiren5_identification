@@ -8,10 +8,18 @@ import {
   TableRow,
   Paper,
   Hidden,
+  Typography,
 } from '@material-ui/core'
 import ItemIcon from './ItemIcon'
 import ItemMaster from '../items.json'
 import ItemDiscriminator from '../lib/itemFilter'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+  caption: {
+    margin: theme.spacing(1),
+  },
+}))
 
 type Props = {
   price: number | null
@@ -21,6 +29,7 @@ type Props = {
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function ItemTable(props: Props) {
+  const classes = useStyles()
   const items = useMemo(() => {
     if (!props.price) {
       return ItemMaster
@@ -74,6 +83,14 @@ export default function ItemTable(props: Props) {
           ))}
         </TableBody>
       </Table>
+      <Typography
+        className={classes.caption}
+        align="right"
+        component="p"
+        variant="caption"
+      >
+        ※容量は床落ちの初期容量のみを考慮しています
+      </Typography>
     </TableContainer>
   )
 }
