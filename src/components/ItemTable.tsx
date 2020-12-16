@@ -13,7 +13,9 @@ import ItemMaster from '../items.json'
 import ItemDiscriminator from '../lib/itemFilter'
 
 type Props = {
-  price: number
+  price: number | null
+  priceType: 'buy' | 'sell'
+  capacity: number | null
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -23,16 +25,18 @@ export default function ItemTable(props: Props) {
       return ItemMaster
     }
 
-    const discriminator = new ItemDiscriminator('buy')
+    const discriminator = new ItemDiscriminator(props.priceType)
 
     return ItemMaster.reduce((list: any[], item: any) => {
-      const res = discriminator.disc(item, props.price)
-      if (res) {
-        list.push(res)
+      if (props.price) {
+        const res = discriminator.disc(item, props.price, props.capacity)
+        if (res) {
+          list.push(res)
+        }
       }
       return list
     }, [])
-  }, [props.price])
+  }, [props.price, props.priceType, props.capacity])
 
   return (
     <TableContainer component={Paper}>

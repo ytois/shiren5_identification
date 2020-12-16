@@ -11,27 +11,28 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 type Props = {
-  onChangePriceType?: (priceType: string) => void
-  onChangePrice?: (price: number) => void
-  onChangeCapacity?: (capacity: number) => void
+  price: number | null
+  priceType: string
+  capacity: number | null
+  onChangePrice?: (price: number | null) => void
+  onChangePriceType?: (priceType: 'buy' | 'sell') => void
+  onChangeCapacity?: (capacity: number | null) => void
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const InputArea = (props: Props) => {
   const classes = useStyles()
 
-  const [priceType, setPriceType] = useState('buy')
-
   const priceTypeText = useMemo(() => {
-    return priceType === 'buy' ? '買値' : '売値'
-  }, [priceType])
+    return props.priceType === 'buy' ? '買値' : '売値'
+  }, [props.priceType])
 
   const priceTypeColor = useMemo(() => {
-    return priceType === 'buy' ? 'primary' : 'secondary'
-  }, [priceType])
+    return props.priceType === 'buy' ? 'primary' : 'secondary'
+  }, [props.priceType])
 
   const changePriceType = () => {
-    setPriceType(priceType === 'buy' ? 'sell' : 'buy')
+    const priceType = props.priceType === 'buy' ? 'sell' : 'buy'
     if (props.onChangePriceType) {
       props.onChangePriceType(priceType)
     }
@@ -42,7 +43,7 @@ const InputArea = (props: Props) => {
       return
     }
     const price = event.target.value
-    props.onChangePrice(Number(price))
+    props.onChangePrice(price ? Number(price) : null)
   }
 
   const onChangeCapacity = (event: React.ChangeEvent) => {
@@ -53,7 +54,7 @@ const InputArea = (props: Props) => {
       return
     }
     const capacity = event.target.value
-    props.onChangeCapacity(Number(capacity))
+    props.onChangeCapacity(capacity ? Number(capacity) : null)
   }
 
   return (
@@ -77,17 +78,19 @@ const InputArea = (props: Props) => {
         </Grid>
         <Grid item>
           <TextField
-            label="Price"
+            label="値段"
             type="number"
             variant="outlined"
+            value={props.price || ''}
             onChange={onChangePrice}
           />
         </Grid>
         <Grid item>
           <TextField
-            label="Capacity"
+            label="容量"
             type="number"
             variant="outlined"
+            value={props.capacity || ''}
             onChange={onChangeCapacity}
           />
         </Grid>

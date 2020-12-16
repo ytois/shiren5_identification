@@ -27,13 +27,17 @@ const range = (begin: number, end: number) =>
   [...Array(end - begin + 1)].map((_, i) => begin + i)
 
 export default class ItemDiscriminator {
-  priceType: 'buy' | 'selling'
+  priceType: 'buy' | 'sell'
 
-  constructor(priceType: 'buy' | 'selling') {
+  constructor(priceType: 'buy' | 'sell') {
     this.priceType = priceType
   }
 
-  public disc(item: Item, price: number, capacity?: number): ResultItem | null {
+  public disc(
+    item: Item,
+    price: number,
+    capacity?: number | null
+  ): ResultItem | null {
     const items: ResultItem[] = this.generateItems(item, capacity)
 
     let result: Item | null = null
@@ -57,7 +61,7 @@ export default class ItemDiscriminator {
     return targetType.indexOf(item.type) >= 0
   }
 
-  private generateItems(item: Item, capacity?: number): ResultItem[] {
+  private generateItems(item: Item, capacity?: number | null): ResultItem[] {
     if (!this.hasCapacity(item)) {
       return [item]
     }
